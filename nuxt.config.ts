@@ -3,12 +3,7 @@ export default defineNuxtConfig({
   devtools: { enabled: false },
   ignore: ["sanity/**"],
   vite: { server: { watch: { ignored: ["**/sanity/**"] } } },
-  css: [
-    "@fontsource/outfit/400.css",
-    "@fontsource/outfit/500.css",
-    "@fontsource/outfit/600.css",
-    "~/assets/scss/main.scss",
-  ],
+  css: ["~/assets/scss/main.scss"],
   runtimeConfig: {
     sanityProjectId: "",
     sanityDataset: "production",

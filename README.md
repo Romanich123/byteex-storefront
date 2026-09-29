@@ -72,7 +72,7 @@ Original image exports are preserved outside this repository; optimized assets h
 - Browser checks at 320, 428, 768, and 1465 CSS pixels: no horizontal page overflow after the tablet logo fix.
 - Verified gallery selection, mobile step/review controls, FAQ expansion, and CTA anchor navigation. No browser console errors were observed in the tested page.
 - The storefront dependency audit reported zero vulnerabilities. The standalone Studio dependency tree still reports 13 transitive advisories (1 low, 8 moderate, 4 high); compatible updates did not clear them. Review upstream fixes before deploying Studio. No forced dependency overrides have been added.
-- Exact Figma typography is not available from the image exports. Outfit is bundled locally as an approximation; final pixel-level matching requires the original font and inspect values.
+- Sofia Pro is bundled from the supplied font files, with regular (400), medium (500), semibold (600), and bold (700) faces. It is used for headings, body copy, and controls. Final pixel-level spacing can be compared against the Figma inspect values.
 
 ## Connect the configured project
 

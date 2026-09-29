@@ -10,7 +10,6 @@
     "typecheck": "nuxt typecheck"
   },
   "dependencies": {
-    "@fontsource/outfit": "^5.3.0",
     "@sanity/client": "^7.0.0",
     "nuxt": "^3.17.5",
     "vue": "^3.5.16"
