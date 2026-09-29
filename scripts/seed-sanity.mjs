@@ -48,6 +48,7 @@ page.heroImages = await Promise.all(
 page.gallery = await Promise.all(
   page.gallery.map(async (item, i) => ({
     ...item,
+    _type: "object",
     _key: `outfit-${i}`,
     image: await upload(item.image),
   })),
@@ -57,6 +58,7 @@ page.finalImage = await upload(page.finalImage);
 for (const field of ["benefits", "steps", "reviews", "faqs", "impact"])
   page[field] = page[field].map((item, i) => ({
     ...item,
+    _type: "object",
     _key: `${field}-${i}`,
   }));
 await client.create({

@@ -68,7 +68,7 @@ Original image exports are preserved outside this repository; optimized assets h
 ## Verification
 
 - Nuxt TypeScript check and production build pass.
-- Sanity Studio production build passes with placeholder project configuration; live CMS access/import remains untested until a real project is connected.
+- Sanity Studio production build passes. Content has been imported into project `7hzrxnec` / `production`; the public API, hero image URLs (HTTP 200), and local `/api/page` response (`source: sanity`) have been verified.
 - Browser checks at 320, 428, 768, and 1465 CSS pixels: no horizontal page overflow after the tablet logo fix.
 - Verified gallery selection, mobile step/review controls, FAQ expansion, and CTA anchor navigation. No browser console errors were observed in the tested page.
 - The storefront dependency audit reported zero vulnerabilities. The standalone Studio dependency tree still reports 13 transitive advisories (1 low, 8 moderate, 4 high); compatible updates did not clear them. Review upstream fixes before deploying Studio. No forced dependency overrides have been added.
@@ -76,7 +76,7 @@ Original image exports are preserved outside this repository; optimized assets h
 
 ## Connect the configured project
 
-Local `.env` files are configured for project `7hzrxnec`, dataset `production`. The public API responds successfully; initial page content has not been imported yet.
+Local `.env` files are configured for project `7hzrxnec`, dataset `production`. The initial landing page and its images have been imported. The public API responds successfully and the local storefront returns `source: sanity`.
 
 To sign in and import without creating or sharing a manual token:
 
