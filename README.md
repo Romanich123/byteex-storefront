@@ -73,3 +73,18 @@ Original image exports are preserved outside this repository; optimized assets h
 - Verified gallery selection, mobile step/review controls, FAQ expansion, and CTA anchor navigation. No browser console errors were observed in the tested page.
 - The storefront dependency audit reported zero vulnerabilities. The standalone Studio dependency tree still reports 13 transitive advisories (1 low, 8 moderate, 4 high); compatible updates did not clear them. Review upstream fixes before deploying Studio. No forced dependency overrides have been added.
 - Exact Figma typography is not available from the image exports. Outfit is bundled locally as an approximation; final pixel-level matching requires the original font and inspect values.
+
+## Connect the configured project
+
+Local `.env` files are configured for project `7hzrxnec`, dataset `production`. The public API responds successfully; initial page content has not been imported yet.
+
+To sign in and import without creating or sharing a manual token:
+
+```sh
+cd sanity
+npx sanity login
+npm run import:content
+npm run dev
+```
+
+The importer uses the authenticated CLI session and refuses to overwrite an existing landing page. Once imported, restart Nuxt in the repository root and check `/api/page`: `source` should be `sanity`.

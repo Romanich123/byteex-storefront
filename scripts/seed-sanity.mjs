@@ -1,7 +1,7 @@
 /** Run with Node >= 22 and SANITY_WRITE_TOKEN after configuring .env. */
 import { createClient } from "@sanity/client";
 import { readFile } from "node:fs/promises";
-import { resolve } from "node:path";
+import { fileURLToPath } from "node:url";
 import { fallbackPage } from "../data/page.ts";
 const {
   NUXT_SANITY_PROJECT_ID: projectId,
@@ -28,7 +28,7 @@ async function upload(path) {
   if (!cache.has(path)) {
     const asset = await client.assets.upload(
       "image",
-      await readFile(resolve("public", path.slice(1))),
+      await readFile(fileURLToPath(new URL(`../public${path}`, import.meta.url))),
       { filename: path.split("/").at(-1) },
     );
     cache.set(path, {

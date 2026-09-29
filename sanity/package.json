@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "sanity dev",
     "build": "sanity build",
-    "deploy": "sanity deploy"
+    "deploy": "sanity deploy",
+    "import:content": "NODE_OPTIONS=--experimental-strip-types sanity exec scripts/import-content.mjs --with-user-token"
   },
   "dependencies": {
     "react": "^19.0.0",
