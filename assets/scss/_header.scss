@@ -1,0 +1,38 @@
+@use "tokens" as *;
+
+.announcement {
+  min-height: 36px;
+  padding: 10px 15px;
+  background: $cream;
+  text-align: center;
+  font: 11px/1.4 $font-family;
+  color: #626262;
+  letter-spacing: 0.25px;
+}
+
+.header {
+  padding-top: 29px;
+  img {
+    width: 200px;
+    height: 36px;
+  }
+}
+
+@media (max-width: 700px) {
+  .announcement {
+    min-height: 35px;
+    padding: 10px 5px;
+    font-size: 11px;
+    letter-spacing: 0.6px;
+  }
+
+  .header {
+    padding-top: 13px;
+    display: flex;
+    justify-content: center;
+    img {
+      width: 200px;
+      height: 36px;
+    }
+  }
+}

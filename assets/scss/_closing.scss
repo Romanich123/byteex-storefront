@@ -1,0 +1,63 @@
+@use "tokens" as *;
+
+.closing {
+  padding: 80px 20px 55px;
+  background: linear-gradient(white 65%, $cream);
+  text-align: center;
+  h2 {
+    color: $purple;
+    margin-bottom: 15px;
+  }
+  > p {
+    font-size: 14px;
+  }
+}
+
+.closing-art {
+  width: 670px;
+  height: 360px;
+  object-fit: contain;
+  margin: 30px auto 28px;
+}
+
+.closing-promises {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-top: 30px;
+  span {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    color: #858585;
+    font: 12px/1.4 $font-family;
+    text-align: left;
+  }
+  svg {
+    width: 25px;
+    height: 25px;
+  }
+}
+
+@media (max-width: 700px) {
+  .closing {
+    padding: 54px 28px 55px;
+    h2 {
+      color: $navy;
+      font-size: 26px;
+      margin-bottom: 15px;
+    }
+    > p {
+      font-size: 15px;
+      letter-spacing: 0.3px;
+    }
+  }
+
+  .closing-art {
+    width: calc(100% + 12px);
+    max-width: none;
+    height: auto;
+    aspect-ratio: 1.45;
+    margin: 28px -6px 60px;
+  }
+}

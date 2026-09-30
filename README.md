@@ -1,17 +1,60 @@
-# Byteex storefront
+# Byteex
 
-Responsive implementation of the supplied Byteex Figma design using **Nuxt 3, Vue 3, TypeScript, SCSS, and Sanity**.
+A responsive loungewear landing page built with Nuxt 3, TypeScript, SCSS and Sanity.
 
-## Local development
+[Design in Figma](https://www.figma.com/design/y2Hafb1Z2whk4tNLfnt9YD/Byteex---Standard-Development-Test--Copy-?node-id=0-1)
 
-Requires Node.js 22.17+.
+## Run locally
+
+Use Node.js 22.17 or newer.
 
 ```sh
-npm install
+npm ci
+cp .env.example .env
 npm run dev
 ```
 
-Open http://localhost:3000. With no Sanity configuration, the page uses the design content in `data/page.ts`, so the preview runs independently of a CMS account.
+Open http://localhost:3000. Without Sanity settings, the page uses the sample content in `data/page.ts`.
+
+To use the existing CMS, set these values in `.env`:
+
+```dotenv
+NUXT_SANITY_PROJECT_ID=7hzrxnec
+NUXT_SANITY_DATASET=production
+```
+
+The dataset is public, so reading content needs no token. Requests to Sanity run on the server. If a request fails, the page falls back to the sample content. `/api/page` reports its source as `sanity`, `local` or `fallback`.
+
+## Edit content
+
+```sh
+cd sanity
+npm ci
+cp .env.example .env
+```
+
+Set `SANITY_STUDIO_PROJECT_ID=7hzrxnec` and `SANITY_STUDIO_DATASET=production` in `sanity/.env`, then run:
+
+```sh
+npx sanity login
+npm run dev
+```
+
+Open http://localhost:3333, select **Landing page**, and publish your changes. The storefront reads published content on new page requests; Sanity's CDN may briefly cache updates. If Studio requests CORS access, allow its local origin in the Sanity project's API settings.
+
+The existing dataset already contains the page. For an empty dataset, `npm run import:content` in `sanity/` uploads the sample content and images using your CLI login. It will not overwrite an existing page. Keep credentials in local `.env` files, which Git ignores.
+
+## Project structure
+
+- `app.vue` fetches content and composes the page.
+- `components/landing/` contains the page sections and their interactive state.
+- `components/` contains shared controls, icons, the header and product gallery.
+- `assets/scss/` contains fonts, shared variables, base styles and section styles. Each section's responsive rules live in the same file.
+- `types/content.ts` describes the page's data contract.
+- `server/api/page.get.ts` fetches published Sanity content.
+- `sanity/` contains the standalone Studio, schema and import scripts.
+
+## Checks
 
 ```sh
 npm run typecheck
@@ -19,72 +62,10 @@ npm run build
 npm run preview
 ```
 
-## Sanity setup
+To build the editor separately, run `npm run build --prefix sanity`.
 
-1. Create a project at https://www.sanity.io/manage with a `production` dataset.
-2. Copy `.env.example` to `.env` and enter the project ID and dataset. Public datasets need no read token. A private dataset needs a read-only server token in `NUXT_SANITY_READ_TOKEN`.
-3. In `sanity/`, copy `.env.example` to `.env` and set the matching project ID and dataset.
-4. Run `npm install` and `npm run dev` inside `sanity/` to start Studio.
-5. Add Studio's local origin (normally http://localhost:3333) to the project's permitted CORS origins if required. Storefront reads are server-side.
-6. Create a temporary write token and import the supplied content from the repository root:
+## Scope
 
-```sh
-read -s SANITY_WRITE_TOKEN
-export SANITY_WRITE_TOKEN
-node --env-file=.env --experimental-strip-types scripts/seed-sanity.mjs
-unset SANITY_WRITE_TOKEN
-```
+The page includes a product gallery, mobile carousels and an FAQ accordion. CTA buttons lead to the collection gallery; checkout is not part of this implementation. Sofia Pro and the product images come from the supplied design assets. Placeholder copy is retained from the mockup.
 
-The importer uploads the local design assets and creates the landing-page document. It refuses to overwrite an existing document. Revoke the temporary token afterward. Content changes in Studio are retrieved on new page requests (subject to Sanity CDN caching).
-
-Tokens remain server-side. Do not add tokens to public runtime config or commit `.env` files. If Sanity is unavailable, the API serves local content so the page remains usable. The API response `source` distinguishes `sanity`, `local`, and `fallback`.
-
-## Features and scope
-
-- Desktop and mobile layouts based on the provided references.
-- Keyboard-accessible outfit gallery with thumbnail selection.
-- Mobile step and review carousels; FAQ accordion with ARIA state.
-- Responsive community imagery, optimized WebP assets, explicit image dimensions, and lazy loading below the fold.
-- Reusable CTA and icon components; SCSS breakpoints and reduced-motion support.
-- CTA buttons scroll to the collection gallery. No checkout, payment, or backend order creation is included in this landing-page design.
-- Placeholder copy and brand claims are preserved from the supplied design. Replace them with approved content in Sanity before a commercial launch.
-
-## Structure
-
-- `app.vue`: page sections
-- `components/`: reusable UI and gallery
-- `assets/scss/main.scss`: responsive styles
-- `data/page.ts`: local reference content
-- `server/api/page.get.ts`: server-side Sanity content query
-- `sanity/`: standalone content Studio and schema
-- `scripts/seed-sanity.mjs`: initial content and image import
-
-## Design notes
-
-Source: https://www.figma.com/design/y2Hafb1Z2whk4tNLfnt9YD/Byteex---Standard-Development-Test--Copy-?node-id=0-1
-
-Original image exports are preserved outside this repository; optimized assets here are derived from them. The supplied mobile screenshots are visual references. Font metrics and any assets absent from the export need final confirmation against Figma inspection; this is not claimed to be a pixel-perfect match yet.
-
-## Verification
-
-- Nuxt TypeScript check and production build pass.
-- Sanity Studio production build passes. Content has been imported into project `7hzrxnec` / `production`; the public API, hero image URLs (HTTP 200), and local `/api/page` response (`source: sanity`) have been verified.
-- Browser checks at 320, 428, 768, and 1465 CSS pixels: no horizontal page overflow after the tablet logo fix.
-- Verified gallery selection, mobile step/review controls, FAQ expansion, and CTA anchor navigation. No browser console errors were observed in the tested page.
-- The storefront dependency audit reported zero vulnerabilities. The standalone Studio dependency tree still reports 13 transitive advisories (1 low, 8 moderate, 4 high); compatible updates did not clear them. Review upstream fixes before deploying Studio. No forced dependency overrides have been added.
-- Sofia Pro is bundled from the supplied font files, with regular (400), medium (500), semibold (600), and bold (700) faces. It is used for headings, body copy, and controls. Final pixel-level spacing can be compared against the Figma inspect values.
-
-## Connect the configured project
-
-Local `.env` files are configured for project `7hzrxnec`, dataset `production`. The initial landing page and its images have been imported. The public API responds successfully and the local storefront returns `source: sanity`.
-
-To sign in and import without creating or sharing a manual token:
-
-```sh
-cd sanity
-npx sanity login
-npm run import:content
-npm run dev
-```
-
-The importer uses the authenticated CLI session and refuses to overwrite an existing landing page. Once imported, restart Nuxt in the repository root and check `/api/page`: `source` should be `sanity`.
+Sanity Studio has unresolved transitive dependency advisories. Review `npm audit --prefix sanity` before deploying the editor. The storefront and Studio have separate dependency trees.

@@ -1,7 +1,8 @@
 import { createClient } from "@sanity/client";
 import { fallbackPage } from "../../data/page";
+import type { PageContent, PageResponse } from "../../types/content";
 
-export default defineEventHandler(async (event) => {
+export default defineEventHandler(async (event): Promise<PageResponse> => {
   const config = useRuntimeConfig(event);
   if (!config.sanityProjectId) return { page: fallbackPage, source: "local" };
   try {
@@ -12,7 +13,7 @@ export default defineEventHandler(async (event) => {
       apiVersion: "2026-09-29",
       useCdn: !config.sanityReadToken,
     });
-    const content = await client.fetch(
+    const content = await client.fetch<Partial<PageContent> | null>(
       `*[_type == "landingPage"][0]{
       title, announcement, ctaLabel, "heroImages": heroImages[].asset->url,
       heroBenefits, benefitsTitle, benefits,

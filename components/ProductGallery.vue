@@ -1,8 +1,11 @@
 <script setup lang="ts">
-const props = defineProps<{ items: { image: string; name: string }[] }>();
+import type { GalleryItem } from "~/types/content";
+
+const props = defineProps<{ items: GalleryItem[] }>();
 const selected = ref(0);
 const active = computed(() => props.items[selected.value] || props.items[0]);
 function move(direction: number) {
+  if (!props.items.length) return;
   selected.value =
     (selected.value + direction + props.items.length) % props.items.length;
 }

@@ -1,4 +1,6 @@
-export const fallbackPage = {
+import type { PageContent } from "~/types/content";
+
+export const fallbackPage: PageContent = {
   title: "Don’t apologize for being comfortable.",
   announcement: "FREE SHIPPING on orders > $200",
   ctaLabel: "Customize Your Outfit",
@@ -102,4 +104,3 @@ export const fallbackPage = {
   finalText: "Click below to browse our collection!",
   finalImage: "/images/final-collage.webp",
 };
-export type PageContent = typeof fallbackPage;

@@ -1,0 +1,61 @@
+@use "tokens" as *;
+
+.press {
+  padding: 77px 0 60px;
+  background: linear-gradient($cream, white);
+  text-align: center;
+  p {
+    font-size: 17px;
+    color: #8b8b8b;
+    letter-spacing: 1.5px;
+    margin-bottom: 24px;
+  }
+}
+
+.press-logos {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 38px;
+  img {
+    width: 17%;
+    height: 48px;
+    object-fit: contain;
+  }
+}
+
+@media (max-width: 700px) {
+  .press {
+    padding-top: 93px;
+    padding-bottom: 28px;
+    p {
+      margin-bottom: 20px;
+      font-size: 14px;
+    }
+    .wrap {
+      width: calc(100% - 32px);
+    }
+  }
+
+  .press-logos {
+    gap: 18px;
+    justify-content: center;
+    height: 46px;
+    img {
+      width: calc((100% - 36px) / 3);
+      height: 43px;
+      &.mobile-hidden {
+        display: none;
+      }
+    }
+  }
+
+  .press .dots {
+    margin: 20px 0 0;
+  }
+}
+
+.press-logos img {
+  flex: 1;
+  min-width: 0;
+}
