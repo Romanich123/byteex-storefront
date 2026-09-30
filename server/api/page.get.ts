@@ -17,7 +17,7 @@ export default defineEventHandler(async (event): Promise<PageResponse> => {
       `*[_type == "landingPage"][0]{
       title, announcement, ctaLabel, "heroImages": heroImages[].asset->url,
       heroBenefits, benefitsTitle, benefits,
-      "gallery": gallery[]{name, "image": image.asset->url},
+      "gallery": gallery[]{_key, name, "image": image.asset->url},
       storyTitle, "storyImage": storyImage.asset->url, story, steps, reviews, faqs, impact,
       finalTitle, finalText, "finalImage": finalImage.asset->url
     }`,

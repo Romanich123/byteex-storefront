@@ -38,9 +38,9 @@ export const fallbackPage: PageContent = {
     },
   ],
   gallery: [
-    { image: "/images/robe.webp", name: "White Robe" },
-    { image: "/images/grey-set.webp", name: "Everyday Lounge Set" },
-    { image: "/images/reading.webp", name: "Slow Morning Essentials" },
+    {_key: "outfit-0", image: "/images/robe.webp", name: "White Robe" },
+    {_key: "outfit-1", image: "/images/grey-set.webp", name: "Everyday Lounge Set" },
+    {_key: "outfit-2", image: "/images/reading.webp", name: "Slow Morning Essentials" },
   ],
   storyTitle: "Be your best self.",
   storyImage: "/images/story.webp",

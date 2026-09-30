@@ -1,6 +1,7 @@
 export interface GalleryItem {
   image: string;
   name: string;
+  _key: string
 }
 
 export interface Feature {

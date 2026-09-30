@@ -80,6 +80,7 @@ export const landingPage = defineType({
       type: "array",
       of: [{ type: "text" }],
     }),
+
     objects("steps", "Comfort steps", [
       string("title", "Title"),
       text("text", "Description"),

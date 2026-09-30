@@ -18,6 +18,7 @@ const benefitIcons = ["sun", "cart", "waves"];
 <template>
   <section class="hero wrap" aria-labelledby="hero-title">
     <h1 id="hero-title">{{ title }}</h1>
+
     <div class="hero-art" aria-label="Everyday loungewear collection">
       <img
         v-for="(src, i) in heroImages"

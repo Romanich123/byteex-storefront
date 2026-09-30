@@ -16,6 +16,7 @@ const page = computed(() => data.value?.page ?? fallbackPage);
         :hero-benefits="page.heroBenefits"
         :cta-label="page.ctaLabel"
         :reviews="page.reviews"
+
       />
       <LandingPress />
       <LandingBenefits

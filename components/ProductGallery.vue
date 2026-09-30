@@ -42,7 +42,7 @@ function move(direction: number) {
       <div class="gallery-thumbs">
         <button
           v-for="(item, i) in items"
-          :key="item.image"
+          :key="item._key"
           :aria-label="`View ${item.name}`"
           :aria-pressed="selected === i"
           @click="selected = i"
